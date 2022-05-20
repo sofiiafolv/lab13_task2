@@ -417,8 +417,5 @@ class LinkedBST(AbstractCollection):
         print(f"Result of searching 10,000 words in a balanced BST: {result}")
 
 
-lbst = LinkedBST([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-lbst.rebalance()
-print(lbst.is_balanced())
-print(lbst)
+lbst = LinkedBST()
 lbst.demo_bst("D:\\УКУ\\ОП\\2022\\Lab13\\binary_search_tree\\words (2).txt")
