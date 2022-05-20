@@ -10,4 +10,4 @@ Finds a word in BST created from list of random words.
 I also use 65 000 nodes, and it works in 0.5 or 1 second. It works in 3 or 4 seconds if BST has more than 200,000 nodes.
 ### finding_4
 Finds a word in a balanced tree
-The reason that I choose 65 000 nodes, because rebalancing does not work with a bigger amount of words. So I also decreased a number of nodes in previous functions. It works 1 second, even longer than with a previous function(BST of random words). Also rebalancing doesn't work all the time.
+The reason that I choose 65 000 nodes, because rebalancing does not work with a bigger amount of words. So I also decreased a number of nodes in previous functions. It works 1 second or less, but even longer than with a previous function(BST of random words). Also rebalancing doesn't work all the time.
