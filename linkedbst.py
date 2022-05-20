@@ -406,7 +406,6 @@ class LinkedBST(AbstractCollection):
             for word in words:
                 lbst3.add(word)
             lbst3 = lbst3.rebalance()
-            print(lbst3.is_balanced())
             lst3 = []
             searching_words = choices(lst, k=10000)
             for word in searching_words:
