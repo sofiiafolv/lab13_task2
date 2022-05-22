@@ -4,8 +4,6 @@ Author: Ken Lambert
 """
 
 from random import choices
-from secrets import choice
-from time import time
 from timeit import timeit
 from abstractcollection import AbstractCollection
 from bstnode import BSTNode
@@ -83,18 +81,19 @@ class LinkedBST(AbstractCollection):
     def find(self, item):
         """If item matches an item in self, returns the
         matched item, or None otherwise."""
+        root = self._root
+        while root != None:
 
-        def recurse(node):
-            if node is None:
-                return None
-            elif item == node.data:
-                return node.data
-            elif item < node.data:
-                return recurse(node.left)
+            # pass right subtree as new tree
+            if item > root.data:
+                root = root.right
+
+            # pass left subtree as new tree
+            elif item < root.data:
+                root = root.left
             else:
-                return recurse(node.right)
-
-        return recurse(self._root)
+                return item  # if the key is found return 1
+        return None
 
     # Mutator methods
     def clear(self):
@@ -102,32 +101,39 @@ class LinkedBST(AbstractCollection):
         self._root = None
         self._size = 0
 
-    def add(self, item):
+    def add(self, data):
         """Adds item to the tree."""
 
         # Helper function to search for item's position
-        def recurse(node):
-            # New item is less, go left until spot is found
-            if item < node.data:
-                if node.left == None:
-                    node.left = BSTNode(item)
-                else:
-                    recurse(node.left)
-            # New item is greater or equal,
-            # go right until spot is found
-            elif node.right == None:
-                node.right = BSTNode(item)
-            else:
-                recurse(node.right)
-                # End of recurse
+        node = BSTNode(data)
 
-        # Tree is empty, so new item goes at the root
-        if self.isEmpty():
-            self._root = BSTNode(item)
-        # Otherwise, search for the item's spot
+        if self._root == None:
+            #  When adds a first node in bst
+            self._root = node
         else:
-            recurse(self._root)
-        self._size += 1
+            find = self._root
+            #  Add new node to proper position
+            while find != None:
+                if find.data >= data:
+                    if find.left == None:
+                        #  When left child empty
+                        #  So add new node here
+                        find.left = node
+                        return
+                    else:
+                        #  Otherwise
+                        #  Visit left sub-tree
+                        find = find.left
+
+                else:
+                    if find.right == None:
+                        #  When right child empty
+                        #  So add new node here
+                        find.right = node
+                        return
+                    else:
+                        #  Visit right sub-tree
+                        find = find.right
 
     def remove(self, item):
         """Precondition: item is in self.
@@ -375,7 +381,7 @@ class LinkedBST(AbstractCollection):
 
         def finding_2(lst):
             lbst1 = LinkedBST()
-            for word in lst[:1100]:
+            for word in lst[:30000]:
                 lbst1.add(word)
             words = choices(lst, k=10000)
             lst1 = []
